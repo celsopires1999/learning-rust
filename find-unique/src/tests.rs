@@ -1,16 +1,5 @@
 use super::*;
 #[test]
-fn test_unique_iterators() {
-    // arrange
-    let numbers = vec![2, 1, 3, 2];
-    let expected_output = vec![2, 1, 3];
-    // act
-    let actual_output = unique_iterators(numbers);
-    // assert
-    assert_eq!(expected_output, actual_output);
-}
-
-#[test]
 fn test_dedup() {
     let mut v = vec!["b", "b", "a"];
     dedup(&mut v);

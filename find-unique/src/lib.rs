@@ -35,12 +35,6 @@ where
     output
 }
 
-pub fn unique_iterators(_array: Vec<i32>) -> Vec<i32> {
-    // To be done
-    let output: Vec<i32> = vec![2, 1, 3];
-    output
-}
-
 pub fn unique_functions<T>(mut array: Vec<T>) -> Vec<T>
 where
     T: Ord,
