@@ -1,26 +1,55 @@
-pub fn unique(array: Vec<i32>) -> Vec<i32> {
- 
-    // let mut into_iter = array.into_iter();
-    // let _result = into_iter.find(| &x| x == 2);
+use std::collections::HashSet;
+use std::hash::Hash;
 
-    let _result = array.into_iter().find(| &x| x == 2);
+pub fn dedup<T: Eq + Hash + Copy>(v: &mut Vec<T>) {
+    // note the Copy constraint
+    let mut uniques = HashSet::new();
+    v.retain(|e| uniques.insert(*e));
+}
 
-    vec![1, 3, 2]
+pub fn unique<T>(array: Vec<T>) -> Vec<T>
+where
+    T: PartialOrd + Copy,
+{
+    if array.is_empty() {
+        return array;
+    }
 
+    let mut output = Vec::<T>::new();
+
+    output.push(array[0]);
+
+    for i in 1..array.len() {
+        let mut found = false;
+        for j in 0..output.len() {
+            if array[i] == output[j] {
+                found = true;
+                break;
+            }
+        }
+        if !found {
+            output.push(array[i]);
+        }
+    }
+
+    output
+}
+
+pub fn unique_iterators(_array: Vec<i32>) -> Vec<i32> {
+    // To be done
+    let output: Vec<i32> = vec![2, 1, 3];
+    output
+}
+
+pub fn unique_functions<T>(mut array: Vec<T>) -> Vec<T>
+where
+    T: Ord,
+{
+    array.sort();
+    array.dedup();
+    array
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_with_duplicates() {
-        // arrange
-        let numbers = vec![1, 3, 2, 2];        
-        let expected_output = vec![1, 3, 2];
-        // act
-        let actual_output = unique(numbers);
-        // assert
-        assert_eq!(expected_output, actual_output);
-    }
-}
+#[path = "tests.rs"]
+mod tests;
